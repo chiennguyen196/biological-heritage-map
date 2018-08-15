@@ -8,12 +8,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularMaterialModule } from './angular-material.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { RegionPageComponent } from './pages/region-page/region-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    LeafletMapComponent
+    LeafletMapComponent,
+    HomePageComponent,
+    RegionPageComponent
   ],
   imports: [
     BrowserModule,
