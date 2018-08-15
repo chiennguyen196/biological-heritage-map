@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { tileLayer, latLng, Layer, geoJSON } from 'leaflet';
 import { DataWrapper } from '../../domains/data-wrapper';
 import { DataService } from '../../services/data.service';
@@ -8,7 +8,7 @@ import { DataService } from '../../services/data.service';
   templateUrl: './leaflet-map.component.html',
   styleUrls: ['./leaflet-map.component.scss']
 })
-export class LeafletMapComponent implements OnInit {
+export class LeafletMapComponent implements OnChanges {
 
   @Input()
   dataList: DataWrapper[] = [];
@@ -25,7 +25,7 @@ export class LeafletMapComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges(changes: SimpleChanges) {
     this.layers = [];
     console.log(this.dataList.length);
     for (const data of this.dataList) {

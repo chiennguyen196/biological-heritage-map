@@ -19,8 +19,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
     this.dataService.getData(DataType.TINH).subscribe(data => {
-      // console.log(JSON.stringify(data.data));
-      this.ngZone.run(() => this.dataList.push(data));
+      // do not use push, use equal instead
+      this.dataList = [data];
   });
 }
 
