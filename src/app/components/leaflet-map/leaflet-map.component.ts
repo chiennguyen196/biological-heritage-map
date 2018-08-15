@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { tileLayer, latLng } from 'leaflet';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { tileLayer, latLng, Layer, geoJSON } from 'leaflet';
+import { DataWrapper } from '../../domains/data-wrapper';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-leaflet-map',
@@ -8,18 +10,27 @@ import { tileLayer, latLng } from 'leaflet';
 })
 export class LeafletMapComponent implements OnInit {
 
+  @Input()
+  dataList: DataWrapper[] = [];
+
+  layers: Layer[] = [];
 
   options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '' })
     ],
     zoom: 5,
-    center: latLng(46.879966, -121.726909)
+    center: latLng(16.474901, 105.8425937)
   };
 
   constructor() { }
 
   ngOnInit() {
+    this.layers = [];
+    console.log(this.dataList.length);
+    for (const data of this.dataList) {
+      this.layers.push(geoJSON(data.data));
+    }
   }
 
 }

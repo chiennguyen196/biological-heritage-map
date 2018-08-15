@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
@@ -24,7 +25,8 @@ import { RegionPageComponent } from './pages/region-page/region-page.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularMaterialModule,
-    LeafletModule.forRoot()
+    LeafletModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
