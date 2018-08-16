@@ -41,11 +41,14 @@ export class HomePageComponent implements OnInit {
 
   onMouseOverLayer(event: EventWrapper) {
     // console.log('Move over');
-    this.leafletMapComponent.updateShortInfo(event.type, event.data.properties['NameUTF8'] || event.data.properties['TEN_HC'] || event.data.properties['Vung']);
+    this.leafletMapComponent.updateShortInfo(
+      event.type, event.data.properties['NameUTF8'] ||
+      event.data.properties['TEN_HC'] ||
+      event.data.properties['Vung']);
   }
 
   onMouseOutLayer() {
-    this.leafletMapComponent.updateShortInfo('', '')
+    this.leafletMapComponent.clearShortInfo();
   }
 
 }

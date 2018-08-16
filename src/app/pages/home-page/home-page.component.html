@@ -1,15 +1,16 @@
 <div class="row">
-  <mat-card class="col-sm-12 col-md-6 leaflet-map-wrapper">
-    <app-leaflet-map [dataWrappers]="dataWrappers" 
-    (clickLayer)="onClickLayer($event)"
-    (mouseoverLayer)="onMouseOverLayer($event)"
-    (mouseoutLayer)="onMouseOutLayer()"
-    >
-  </app-leaflet-map>
-  </mat-card>
-  <mat-card class="col-sm-12 col-md-6">
-    <mat-card-content>
-      <app-html-viewer></app-html-viewer>
-    </mat-card-content>
-  </mat-card>
+  <div class="col-sm-12 col-md-6">
+    <mat-card class="leaflet-map-wrapper">
+      <app-leaflet-map [dataWrappers]="dataWrappers" (clickLayer)="onClickLayer($event)" (mouseoverLayer)="onMouseOverLayer($event)"
+        (mouseoutLayer)="onMouseOutLayer()">
+      </app-leaflet-map>
+    </mat-card>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <mat-card>
+      <mat-card-content>
+        <app-html-viewer></app-html-viewer>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

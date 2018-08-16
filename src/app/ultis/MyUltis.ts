@@ -1,5 +1,5 @@
-import { DataType } from "../domains/data-type.enum";
-import { Feature } from "../../../node_modules/@types/geojson";
+import { DataType } from '../domains/data-type.enum';
+import { Feature } from '../../../node_modules/@types/geojson';
 
 export class MyUltis {
   public static copyObject<T extends Object>(obj: T): T {
@@ -16,10 +16,12 @@ export class MyUltis {
     str = str ? str : ' ';
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
+      // tslint:disable-next-line:no-bitwise
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
     let colour = '#';
     for (let i = 0; i < 3; i++) {
+      // tslint:disable-next-line:no-bitwise
       const value = (hash >> (i * 8)) & 0xFF;
       colour += ('00' + value.toString(16)).substr(-2);
     }
@@ -28,7 +30,7 @@ export class MyUltis {
 
   public static getColorOfFeature(type: DataType, feature: Feature): string {
     if ([DataType.KHU_BAO_TON, DataType.KHU_DI_SAN, DataType.KHU_DU_TRU_SINH_QUYEN, DataType.VUON_QUOC_GIA].find((ele) => ele === type)) {
-      return MyUltis.stringToColour(feature.properties['NameUTF8'])
+      return MyUltis.stringToColour(feature.properties['NameUTF8']);
     }
     return null;
   }

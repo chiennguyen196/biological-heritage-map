@@ -1,10 +1,8 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { tileLayer, latLng, Layer, geoJSON, Control, DomUtil, Map, GeoJSON, featureGroup, LeafletEvent, GeoJSONOptions, PathOptions } from 'leaflet';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { tileLayer, latLng, Layer, geoJSON, Control, DomUtil, Map, GeoJSON, LeafletEvent } from 'leaflet';
 import { DataWrapper } from '../../domains/data-wrapper';
-import { DataService } from '../../services/data.service';
 import { EventWrapper } from '../../domains/event-wrapper';
 import { Feature } from 'geojson';
-import { DataType } from '../../domains/data-type.enum';
 import { MyUltis } from '../../ultis/MyUltis';
 
 @Component({
@@ -19,7 +17,7 @@ export class LeafletMapComponent implements OnChanges {
 
   layers: Layer[] = [];
   private shortInfoDiv: HTMLElement;
-  private map: Map
+  private map: Map;
 
   @Output()
   mouseoverLayer: EventEmitter<EventWrapper> = new EventEmitter();
@@ -51,6 +49,8 @@ export class LeafletMapComponent implements OnChanges {
 
   private _createGeoJSONLayer(dataWrapper: DataWrapper): GeoJSON {
 
+    let geojson: GeoJSON;
+
     const mouseoverFeature = (e: LeafletEvent) => {
       const layer = e.target;
       layer.setStyle({
@@ -61,34 +61,34 @@ export class LeafletMapComponent implements OnChanges {
         fillColor: '#666'
       });
       this.mouseoverLayer.emit(new EventWrapper(dataWrapper.type, layer.feature as Feature));
-    }
+    };
 
     const mouseoutFeature = (e: LeafletEvent) => {
       geojson.resetStyle(e.target);
       this.mouseoutLayer.emit();
-    }
+    };
 
     const clickFeature = (e: LeafletEvent) => {
       console.log(e.target);
-      this.clickLayer.emit(new EventWrapper(dataWrapper.type, e.target.feature as Feature))
-    }
+      this.clickLayer.emit(new EventWrapper(dataWrapper.type, e.target.feature as Feature));
+    };
 
-    const geojson: GeoJSON = geoJSON(dataWrapper.data, {
-      onEachFeature: (featureGroup, layer) => {
+    geojson = geoJSON(dataWrapper.data, {
+      onEachFeature: (_featureGroup, layer) => {
         layer.on({
           mouseover: mouseoverFeature,
           mouseout: mouseoutFeature,
           click: clickFeature
-        })
+        });
       },
       style: (feature: Feature) => {
         return {
           weight: 1,
           fillOpacity: 0.4,
           fillColor: MyUltis.getColorOfFeature(dataWrapper.type, feature)
-        }
+        };
       }
-    })
+    });
     return geojson;
   }
 
@@ -97,7 +97,11 @@ export class LeafletMapComponent implements OnChanges {
     <h4>${title}</h4>
     <div>${content}<div>
     `;
+  }
 
+  public clearShortInfo() {
+    this.shortInfoDiv.innerHTML = `
+    <h4>Hover để xem</h4>`;
   }
 
   onMapReady(map: Map) {
