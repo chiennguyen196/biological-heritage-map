@@ -39,7 +39,6 @@ export class LeafletMapComponent implements OnChanges {
 
   constructor() {
     this.shortInfoDiv = DomUtil.create('div', 'info');
-    this.updateShortInfo('Test', 'test');
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -49,22 +48,6 @@ export class LeafletMapComponent implements OnChanges {
       this.layers.push(this._createGeoJSONLayer(data));
     }
   }
-
-  // private _createStyleObj(type: DataType): PathOptions {
-  //   const _defaultStyle: PathOptions = {
-  //     weight: 1,
-  //     fillOpacity: 0.4
-  //   }
-
-  //   let _customStyle: PathOptions = {}
-  //   if ([DataType.KHU_BAO_TON, DataType.KHU_DI_SAN, DataType.KHU_DU_TRU_SINH_QUYEN, DataType.VUON_QUOC_GIA].find((ele) => ele === type)) {
-  //     _customStyle = {
-  //       fillColor
-  //     }
-  //   }
-
-  //   return Object.assign({});
-  // }
 
   private _createGeoJSONLayer(dataWrapper: DataWrapper): GeoJSON {
 
