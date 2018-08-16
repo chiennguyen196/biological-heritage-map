@@ -11,6 +11,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.component';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegionPageComponent } from './pages/region-page/region-page.component';
+import { HtmlViewerComponent } from './components/html-viewer/html-viewer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RegionPageComponent } from './pages/region-page/region-page.component';
     NavBarComponent,
     LeafletMapComponent,
     HomePageComponent,
-    RegionPageComponent
+    RegionPageComponent,
+    HtmlViewerComponent
   ],
   imports: [
     BrowserModule,
