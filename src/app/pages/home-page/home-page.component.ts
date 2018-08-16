@@ -10,17 +10,16 @@ import { DataType } from '../../domains/data-type.enum';
 })
 export class HomePageComponent implements OnInit {
 
-  dataList: DataWrapper[] = [];
+  dataWrappers: DataWrapper[] = [];
 
   constructor(
     private dataService: DataService,
-    private ngZone: NgZone
   ) { }
 
   ngOnInit() {
     this.dataService.getData(DataType.TINH).subscribe(data => {
       // do not use push, use equal instead
-      this.dataList = [data];
+      this.dataWrappers = [data];
   });
 }
 

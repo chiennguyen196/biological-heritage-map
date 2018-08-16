@@ -11,7 +11,7 @@ import { DataService } from '../../services/data.service';
 export class LeafletMapComponent implements OnChanges {
 
   @Input()
-  dataList: DataWrapper[] = [];
+  dataWrappers: DataWrapper[] = [];
 
   layers: Layer[] = [];
 
@@ -27,8 +27,8 @@ export class LeafletMapComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.layers = [];
-    console.log(this.dataList.length);
-    for (const data of this.dataList) {
+    // console.log(this.dataWrappers.length);
+    for (const data of this.dataWrappers) {
       this.layers.push(geoJSON(data.data));
     }
   }
