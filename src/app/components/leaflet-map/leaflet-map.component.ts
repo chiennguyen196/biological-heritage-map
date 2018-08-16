@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { tileLayer, latLng, Layer, geoJSON } from 'leaflet';
+import { tileLayer, latLng, Layer, geoJSON, Control, DomUtil, Map } from 'leaflet';
 import { DataWrapper } from '../../domains/data-wrapper';
 import { DataService } from '../../services/data.service';
 
@@ -14,6 +14,9 @@ export class LeafletMapComponent implements OnChanges {
   dataWrappers: DataWrapper[] = [];
 
   layers: Layer[] = [];
+  shortInfo: Control = new Control();
+  private shortInfoDiv: HTMLElement;
+  private map: Map
 
   options = {
     layers: [
@@ -23,7 +26,13 @@ export class LeafletMapComponent implements OnChanges {
     center: latLng(16.474901, 105.8425937)
   };
 
-  constructor() { }
+  constructor() {
+    this.shortInfoDiv = DomUtil.create('div', 'info');
+    this.shortInfo.onAdd = () => {
+      return this.shortInfoDiv;
+    }
+    this.updateShortInfo('Test', 'test');
+   }
 
   ngOnChanges(changes: SimpleChanges) {
     this.layers = [];
@@ -32,5 +41,19 @@ export class LeafletMapComponent implements OnChanges {
       this.layers.push(geoJSON(data.data));
     }
   }
+
+  public updateShortInfo(title: string, content: string) {
+    this.shortInfoDiv.innerHTML = `
+    <h4>${title}</h4>
+    <span>${content}<span>
+    `;
+
+  }
+
+  onMapReady(map: Map) {
+    this.map = map;
+    this.shortInfo.addTo(map);
+    map.invalidateSize();
+ }
 
 }
