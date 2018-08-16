@@ -59,7 +59,7 @@ export class LeafletMapComponent implements OnChanges {
         fillOpacity: 0.7,
         fillColor: '#666'
       });
-      this.mouseoverLayer.emit(new EventWrapper(dataWrapper.type, layer as Feature));
+      this.mouseoverLayer.emit(new EventWrapper(dataWrapper.type, layer.feature as Feature));
     }
 
     const mouseoutFeature = (e: LeafletEvent) => {
@@ -68,7 +68,8 @@ export class LeafletMapComponent implements OnChanges {
     }
 
     const clickFeature = (e: LeafletEvent) => {
-      this.clickLayer.emit(new EventWrapper(dataWrapper.type, e.target as Feature))
+      console.log(e.target);
+      this.clickLayer.emit(new EventWrapper(dataWrapper.type, e.target.feature as Feature))
     }
 
     const geojson: GeoJSON = geoJSON(dataWrapper.data, {
@@ -78,6 +79,12 @@ export class LeafletMapComponent implements OnChanges {
           mouseout: mouseoutFeature,
           click: clickFeature
         })
+      },
+      style: () => {
+        return {
+          weight: 1,
+          fillOpacity: 0.4
+        }
       }
     })
     return geojson;
