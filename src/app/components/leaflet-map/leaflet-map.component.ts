@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { tileLayer, latLng, Layer, geoJSON, Control, DomUtil, Map, GeoJSON, featureGroup, LeafletEvent } from 'leaflet';
+import { tileLayer, latLng, Layer, geoJSON, Control, DomUtil, Map, GeoJSON, featureGroup, LeafletEvent, GeoJSONOptions, PathOptions } from 'leaflet';
 import { DataWrapper } from '../../domains/data-wrapper';
 import { DataService } from '../../services/data.service';
 import { EventWrapper } from '../../domains/event-wrapper';
 import { Feature } from 'geojson';
+import { DataType } from '../../domains/data-type.enum';
+import { MyUltis } from '../../ultis/MyUltis';
 
 @Component({
   selector: 'app-leaflet-map',
@@ -48,6 +50,22 @@ export class LeafletMapComponent implements OnChanges {
     }
   }
 
+  // private _createStyleObj(type: DataType): PathOptions {
+  //   const _defaultStyle: PathOptions = {
+  //     weight: 1,
+  //     fillOpacity: 0.4
+  //   }
+
+  //   let _customStyle: PathOptions = {}
+  //   if ([DataType.KHU_BAO_TON, DataType.KHU_DI_SAN, DataType.KHU_DU_TRU_SINH_QUYEN, DataType.VUON_QUOC_GIA].find((ele) => ele === type)) {
+  //     _customStyle = {
+  //       fillColor
+  //     }
+  //   }
+
+  //   return Object.assign({});
+  // }
+
   private _createGeoJSONLayer(dataWrapper: DataWrapper): GeoJSON {
 
     const mouseoverFeature = (e: LeafletEvent) => {
@@ -80,10 +98,11 @@ export class LeafletMapComponent implements OnChanges {
           click: clickFeature
         })
       },
-      style: () => {
+      style: (feature: Feature) => {
         return {
           weight: 1,
-          fillOpacity: 0.4
+          fillOpacity: 0.4,
+          fillColor: MyUltis.getColorOfFeature(dataWrapper.type, feature)
         }
       }
     })
