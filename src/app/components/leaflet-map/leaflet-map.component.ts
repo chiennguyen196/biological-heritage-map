@@ -37,6 +37,7 @@ export class LeafletMapComponent implements OnChanges {
 
   constructor() {
     this.shortInfoDiv = DomUtil.create('div', 'info');
+    this.clearShortInfo();
   }
 
   ngOnChanges(changes: SimpleChanges) {
