@@ -23,11 +23,9 @@ export class HtmlViewerComponent implements OnChanges {
       this.http.get(this.url, { responseType: 'text' }).subscribe(
         val => {
           this.htmlString = val;
-          console.log(val);
         },
         err => {
           this.htmlString = err.message;
-          console.log(err);
         });
     }
   }

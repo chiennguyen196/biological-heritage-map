@@ -4,7 +4,7 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegionPageComponent } from './pages/region-page/region-page.component';
 
 const routes: Routes = [
-    { path: 'vung', component: RegionPageComponent },
+    { path: 'vung/{vung_id}', component: RegionPageComponent },
     { path: '**', component: HomePageComponent }
 ];
 
