@@ -3,13 +3,14 @@ import { DataWrapper } from '../../domains/data-wrapper';
 import { EventWrapper } from '../../domains/event-wrapper';
 import { LeafletMapComponent } from '../../components/leaflet-map/leaflet-map.component';
 import { DataService } from '../../services/data.service';
+import { LeafletMapWrapper } from '../../components/leaflet-map/leaflet-map-wrapper';
 
 @Component({
   selector: 'app-region-page',
   templateUrl: './region-page.component.html',
   styleUrls: ['./region-page.component.scss']
 })
-export class RegionPageComponent implements OnInit {
+export class RegionPageComponent extends LeafletMapWrapper implements OnInit {
 
   @ViewChild(LeafletMapComponent) leafletMapComponent: LeafletMapComponent;
 
@@ -17,25 +18,11 @@ export class RegionPageComponent implements OnInit {
 
   constructor(
     private dataService: DataService
-  ) { }
+  ) {
+    super();
+   }
 
   ngOnInit() {
-  }
-
-  onClickLayer(event: EventWrapper) {
-    // console.log(JSON.stringify(event.data.properties));
-  }
-
-  onMouseOverLayer(event: EventWrapper) {
-    // console.log('Move over');
-    this.leafletMapComponent.updateShortInfo(
-      event.type, event.data.properties['NameUTF8'] ||
-      event.data.properties['TEN_HC'] ||
-      event.data.properties['Vung']);
-  }
-
-  onMouseOutLayer() {
-    this.leafletMapComponent.clearShortInfo();
   }
 
 }
