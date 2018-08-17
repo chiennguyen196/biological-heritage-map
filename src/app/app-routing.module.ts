@@ -3,10 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegionPageComponent } from './pages/region-page/region-page.component';
 import { environment } from '../environments/environment';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 const routes: Routes = [
     { path: `${environment.region.prefix}/:id`, component: RegionPageComponent },
-    { path: '', component: HomePageComponent }
+    { path: '', component: HomePageComponent },
+    { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({

@@ -12,6 +12,7 @@ import { LeafletMapComponent } from './components/leaflet-map/leaflet-map.compon
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegionPageComponent } from './pages/region-page/region-page.component';
 import { HtmlViewerComponent } from './components/html-viewer/html-viewer.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HtmlViewerComponent } from './components/html-viewer/html-viewer.compon
     LeafletMapComponent,
     HomePageComponent,
     RegionPageComponent,
-    HtmlViewerComponent
+    HtmlViewerComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
