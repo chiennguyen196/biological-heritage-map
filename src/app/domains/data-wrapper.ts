@@ -3,9 +3,9 @@ import { GeoJsonObject, FeatureCollection } from 'geojson';
 
 export class DataWrapper {
     type: DataType;
-    data: FeatureCollection;
-    constructor(type: DataType, data: FeatureCollection) {
+    featureCollection: FeatureCollection;
+    constructor(type: DataType, featureCollection: FeatureCollection) {
         this.type = type;
-        this.data = data;
+        this.featureCollection = featureCollection;
     }
 }

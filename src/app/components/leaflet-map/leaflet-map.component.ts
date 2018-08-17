@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
-import { tileLayer, latLng, Layer, geoJSON, Control, DomUtil, Map, GeoJSON, LeafletEvent } from 'leaflet';
+import { tileLayer, latLng, Layer, geoJSON, Control, DomUtil, Map, GeoJSON, LeafletEvent, Bounds, LatLngBounds } from 'leaflet';
 import { DataWrapper } from '../../domains/data-wrapper';
 import { EventWrapper } from '../../domains/event-wrapper';
 import { Feature } from 'geojson';
@@ -16,6 +16,7 @@ export class LeafletMapComponent implements OnChanges {
   dataWrappers: DataWrapper[] = [];
 
   layers: Layer[] = [];
+  fitBounds: LatLngBounds;
   private shortInfoDiv: HTMLElement;
   private map: Map;
 
@@ -74,7 +75,7 @@ export class LeafletMapComponent implements OnChanges {
       this.clickLayer.emit(new EventWrapper(dataWrapper.type, e.target.feature as Feature));
     };
 
-    geojson = geoJSON(dataWrapper.data, {
+    geojson = geoJSON(dataWrapper.featureCollection, {
       onEachFeature: (_featureGroup, layer) => {
         layer.on({
           mouseover: mouseoverFeature,
@@ -115,5 +116,6 @@ export class LeafletMapComponent implements OnChanges {
 
     map.invalidateSize();
   }
+
 
 }

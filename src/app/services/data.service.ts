@@ -16,7 +16,7 @@ const DATA_URL = environment.data_url;
 })
 export class DataService {
 
-  private _cache: { [url: string]: FeatureCollection } = {};
+  // private _cache: { [url: string]: FeatureCollection } = {};
 
   constructor(
     private http: HttpClient,
@@ -32,29 +32,25 @@ export class DataService {
     return undefined;
   }
 
-  private _getCacheData(url): FeatureCollection {
-    return MyUltis.copyObject(this._cache[url]);
-  }
 
   public getData(type: DataType): Observable<DataWrapper> {
     const url = this._getUrl(type);
     if (url === undefined) { return null; }
 
-    if (this._cache[url]) {
-      return of(new DataWrapper(type, this._getCacheData(url)));
-    } else {
-      return this.http.get<FeatureCollection>(url).pipe(
-        tap(_ => this._cache[url] = _),
-        map(data => new DataWrapper(type, data))
-      );
-    }
+    return this.http.get<FeatureCollection>(url).pipe(
+      map(featureCollection => new DataWrapper(type, featureCollection)),
+      catchError((err) => {
+        alert(err.message);
+        throw err;
+      })
+    );
   }
 
-  public search(type: DataType, searchObj: {[key: string]: string}): Observable<DataWrapper> {
+  public search(type: DataType, searchObj: { [key: string]: string }): Observable<DataWrapper> {
     return this.getData(type).pipe(
       map(wrapper => {
-        const features = wrapper.data.features;
-        wrapper.data.features = features.filter(item => {
+        const features = wrapper.featureCollection.features;
+        wrapper.featureCollection.features = features.filter(item => {
           for (const key of Object.keys(searchObj)) {
             if (searchObj[key] !== item.properties[key]) {
               return false;
@@ -63,7 +59,7 @@ export class DataService {
           return true;
         });
         return wrapper;
-      })
+      }),
     );
   }
 }

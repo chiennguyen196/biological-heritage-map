@@ -2,9 +2,7 @@ import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { DataWrapper } from '../../domains/data-wrapper';
 import { DataService } from '../../services/data.service';
 import { DataType } from '../../domains/data-type.enum';
-import { EventWrapper } from '../../domains/event-wrapper';
 import { zip } from 'rxjs';
-import { LeafletMapComponent } from '../../components/leaflet-map/leaflet-map.component';
 import { LeafletMapWrapper } from '../../components/leaflet-map/leaflet-map-wrapper';
 
 @Component({
@@ -13,8 +11,6 @@ import { LeafletMapWrapper } from '../../components/leaflet-map/leaflet-map-wrap
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent extends LeafletMapWrapper implements OnInit {
-
-  dataWrappers: DataWrapper[] = [];
 
   constructor(
     private dataService: DataService,
