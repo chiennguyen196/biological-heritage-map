@@ -18,6 +18,7 @@ export class HtmlViewerComponent implements OnChanges {
   ) { }
 
   ngOnChanges() {
+    // console.log('ng changes');
     if (this.url) {
       this.htmlString = null;
       this.http.get(this.url, { responseType: 'text' }).subscribe(
@@ -27,6 +28,8 @@ export class HtmlViewerComponent implements OnChanges {
         err => {
           this.htmlString = err.message;
         });
+    } else {
+      this.htmlString = `Không có dữ liệu`;
     }
   }
 
