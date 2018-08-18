@@ -4,6 +4,7 @@ import { DataWrapper } from '../../domains/data-wrapper';
 import { EventWrapper } from '../../domains/event-wrapper';
 import { Feature } from 'geojson';
 import { MyUltis } from '../../ultis/MyUltis';
+import { DataType } from '../../domains/data-type.enum';
 
 @Component({
   selector: 'app-leaflet-map',
@@ -36,6 +37,8 @@ export class LeafletMapComponent implements OnChanges {
     center: latLng(16.474901, 105.8425937)
   };
 
+  layersControl = new Control.Layers({}, {}, { position: 'bottomleft' });
+
   constructor() {
     this.shortInfoDiv = DomUtil.create('div', 'info');
     this.clearShortInfo();
@@ -44,8 +47,13 @@ export class LeafletMapComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.layers = [];
     // console.log(this.dataWrappers.length);
-    for (const data of this.dataWrappers) {
-      this.layers.push(this._createGeoJSONLayer(data));
+    for (const wrapper of this.dataWrappers) {
+      const geoLayer = this._createGeoJSONLayer(wrapper);
+      this.layers.push(geoLayer);
+      if (wrapper.type === DataType.TINH) {
+        continue;
+      }
+      this.layersControl.addOverlay(geoLayer, wrapper.type);
     }
   }
 
@@ -113,6 +121,8 @@ export class LeafletMapComponent implements OnChanges {
     const shortInfoControl = new Control();
     shortInfoControl.onAdd = () => this.shortInfoDiv;
     shortInfoControl.addTo(map);
+
+    this.layersControl.addTo(map);
 
     map.invalidateSize();
   }
