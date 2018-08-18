@@ -45,7 +45,7 @@ export class LeafletMapComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.layers = [];
+    this._clearOldLayers();
     // console.log(this.dataWrappers.length);
     for (const wrapper of this.dataWrappers) {
       const geoLayer = this._createGeoJSONLayer(wrapper);
@@ -100,6 +100,13 @@ export class LeafletMapComponent implements OnChanges {
       }
     });
     return geojson;
+  }
+
+  private _clearOldLayers() {
+    for (const layer of this.layers) {
+      this.layersControl.removeLayer(layer);
+    }
+    this.layers = [];
   }
 
   public updateShortInfo(title: string, content: string) {
