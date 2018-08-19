@@ -29,7 +29,7 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
     this.routeSubscription = this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const id = paramMap.get('id');
       let regionType: RegionType;
-      regionType = environment.region.urls[id];
+      regionType = environment.region.urls[id].type;
       if (regionType) {
         this.loadDataIntoMap(regionType);
       } else {

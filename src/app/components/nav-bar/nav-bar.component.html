@@ -1,10 +1,7 @@
 <mat-toolbar color="primary">
   <!-- <button mat-button [routerLink]="['/admin/report']">Report</button> -->
   <span class="website-name">Đa dạng sinh học</span>
-  <button mat-button [routerLink]="['/']">Trang chủ</button>
-
-  <button mat-button [matMenuTriggerFor]="menu">Vùng</button>
-  <mat-menu #menu="matMenu">
-    <button *ngFor="let key of objectKeys(regionUrls)" [routerLink]="regionPrefix + '/' + key" mat-menu-item>{{regionUrls[key]}}</button>
-  </mat-menu>
+  <div *ngFor="let key of objectKeys(regionUrls)">
+    <button mat-button [routerLink]="regionPrefix + '/' + key">{{regionUrls[key].short_name || regionUrls[key].type}}</button>
+  </div>
 </mat-toolbar>

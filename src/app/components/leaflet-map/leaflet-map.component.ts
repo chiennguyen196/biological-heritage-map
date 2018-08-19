@@ -94,7 +94,7 @@ export class LeafletMapComponent implements OnChanges {
       style: (feature: Feature) => {
         return {
           weight: 1,
-          fillOpacity: 0.4,
+          fillOpacity: 0.2,
           fillColor: MyUltis.getColorOfFeature(dataWrapper.type, feature)
         };
       }
