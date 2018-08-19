@@ -4,6 +4,8 @@ import { DataService } from '../../services/data.service';
 import { DataType } from '../../domains/data-type.enum';
 import { zip } from 'rxjs';
 import { LeafletMapWrapper } from '../../components/leaflet-map/leaflet-map-wrapper';
+import { MatDialog } from '@angular/material/dialog';
+import { SearchDialogComponent } from '../../components/search-dialog/search-dialog.component';
 
 @Component({
   selector: 'app-home-page',
@@ -14,6 +16,7 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -30,6 +33,11 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
       this.dataService.getData(DataType.KHU_DU_TRU_SINH_QUYEN),
       this.dataService.getData(DataType.VUON_QUOC_GIA)
     ).subscribe(val => this.dataWrappers = val);
+  }
+
+  onClickSearchButton() {
+    console.log('Search button clicked');
+    this.dialog.open(SearchDialogComponent);
   }
 
 }

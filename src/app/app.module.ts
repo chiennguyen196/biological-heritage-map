@@ -13,6 +13,9 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { RegionPageComponent } from './pages/region-page/region-page.component';
 import { HtmlViewerComponent } from './components/html-viewer/html-viewer.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { SearchDialogComponent } from './components/search-dialog/search-dialog.component';
+import { SearchFormComponent } from './components/search-dialog/search-form/search-form.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     HomePageComponent,
     RegionPageComponent,
     HtmlViewerComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    SearchDialogComponent,
+    SearchFormComponent
   ],
   imports: [
     BrowserModule,
@@ -30,8 +35,11 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     AppRoutingModule,
     AngularMaterialModule,
     LeafletModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
+  entryComponents: [SearchDialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
