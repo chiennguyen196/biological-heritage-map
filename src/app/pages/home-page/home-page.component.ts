@@ -38,6 +38,13 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
   onClickSearchButton() {
     console.log('Search button clicked');
     const searchDialogRef = this.dialog.open(SearchDialogComponent, {
+      // position: {
+      //   right: '1em;'
+      // },
+      // hasBackdrop: false
+    });
+    searchDialogRef.componentInstance.selectFeature.subscribe(feature => {
+      this.fitBounds(feature);
     });
   }
 

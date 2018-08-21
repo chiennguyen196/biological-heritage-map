@@ -2,7 +2,7 @@
   <mat-form-field class="form-field-full-width">
     <input matInput placeholder="Tên" [(ngModel)]="name">
   </mat-form-field>
-  <app-multi-select label="Kiểu loại" [suggestItems]="typeOptions" [(selectedItems)]="type"></app-multi-select>
+  <app-multi-select label="Kiểu loại (*)" [suggestItems]="typeOptions" [(selectedItems)]="type"></app-multi-select>
   <app-multi-select label="Vùng" [suggestItems]="regionOptions" [(selectedItems)]="region"></app-multi-select>
   <p>{{type}}</p>
 </div>

@@ -2,7 +2,7 @@ import { ViewChild } from '@angular/core';
 import { LeafletMapComponent } from './leaflet-map.component';
 import { EventWrapper } from '../../domains/event-wrapper';
 import { DataWrapper } from '../../domains/data-wrapper';
-import { FeatureCollection } from 'geojson';
+import { FeatureCollection, Feature } from 'geojson';
 import { geoJSON, LatLngBounds } from 'leaflet';
 
 export class LeafletMapWrapper {
@@ -27,7 +27,7 @@ export class LeafletMapWrapper {
         this.leafletMapComponent.clearShortInfo();
     }
 
-    fitBounds(geojson: FeatureCollection) {
+    fitBounds(geojson: FeatureCollection | Feature) {
         const bounds: LatLngBounds = geoJSON(geojson).getBounds();
         if (bounds.isValid()) {
             this.leafletMapComponent.fitBounds = bounds;
