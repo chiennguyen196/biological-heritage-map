@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, NgZone } from '@angular/core';
 import { DataWrapper } from '../../domains/data-wrapper';
 import { DataService } from '../../services/data.service';
 import { LeafletMapWrapper } from '../../components/leaflet-map/leaflet-map-wrapper';
@@ -21,8 +21,9 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
     private dataService: DataService,
     private route: ActivatedRoute,
     private router: Router,
+    private _ngZone: NgZone
   ) {
-    super();
+    super(_ngZone);
   }
 
   ngOnInit() {

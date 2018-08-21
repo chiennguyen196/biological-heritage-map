@@ -1,9 +1,10 @@
-import { ViewChild } from '@angular/core';
+import { ViewChild, NgZone } from '@angular/core';
 import { LeafletMapComponent } from './leaflet-map.component';
 import { EventWrapper } from '../../domains/event-wrapper';
 import { DataWrapper } from '../../domains/data-wrapper';
 import { FeatureCollection, Feature } from 'geojson';
 import { geoJSON, LatLngBounds } from 'leaflet';
+import { DataType } from '../../domains/data-type.enum';
 
 export class LeafletMapWrapper {
 
@@ -11,8 +12,14 @@ export class LeafletMapWrapper {
 
     @ViewChild(LeafletMapComponent) leafletMapComponent: LeafletMapComponent;
 
+    constructor(private ngZone: NgZone) { }
+
     onClickLayer(event: EventWrapper) {
-        // console.log(JSON.stringify(event.data.properties));
+        if (event.type === DataType.TINH) {
+            this.ngZone.run(() => {
+                this.fitBounds(event.data);
+            });
+        }
     }
 
     onMouseOverLayer(event: EventWrapper) {
