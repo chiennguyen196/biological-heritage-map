@@ -1,8 +1,16 @@
 <div class="search-form">
-  <mat-form-field class="form-field-full-width">
-    <input matInput placeholder="Tên" [(ngModel)]="name">
-  </mat-form-field>
-  <app-multi-select label="Kiểu loại (*)" [suggestItems]="typeOptions" [(selectedItems)]="type"></app-multi-select>
-  <app-multi-select label="Vùng" [suggestItems]="regionOptions" [(selectedItems)]="region"></app-multi-select>
+  <app-multi-select label="Kiểu loại (*)" [suggestItems]="typeOptions" [formCtrl]="typeCtrl"></app-multi-select>
+  <div *ngIf="typeCtrl.value.length > 0">
+    <mat-form-field class="form-field-full-width">
+      <input type="text" placeholder="Tên" aria-label="Number" matInput [formControl]="nameCtrl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredNameOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <app-multi-select label="Vùng" [suggestItems]="regionOptions" [formCtrl]="regionCtrl"></app-multi-select>
+    <app-multi-select label="Tỉnh" [suggestItems]="provinceOptions" [formCtrl]="provinceCtrl"></app-multi-select>
+  </div>
   <p>{{type}}</p>
 </div>

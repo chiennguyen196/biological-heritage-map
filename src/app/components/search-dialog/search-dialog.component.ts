@@ -29,12 +29,7 @@ export class SearchDialogComponent implements OnInit {
   search() {
     console.log('Search!');
     const searchFormValues = this.searchFormComponent.getValues();
-
-    this.searchService.search(searchFormValues.type, {
-      'NameUTF8': searchFormValues.name,
-      'Tinh': searchFormValues.province,
-      'Vung': searchFormValues.region
-    }).subscribe(data => {
+    this.searchService.search(searchFormValues.types, searchFormValues.searchObject).subscribe(data => {
       console.log(Array.isArray(data));
       this.searchResult = data;
     });

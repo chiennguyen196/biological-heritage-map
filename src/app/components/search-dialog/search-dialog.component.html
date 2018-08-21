@@ -2,11 +2,11 @@
     <h2 mat-dialog-title>Tìm kiếm</h2>
     <mat-dialog-content class="mat-typography">
         <app-search-form></app-search-form>
-        
+
     </mat-dialog-content>
-    <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Đóng</button>
+    <mat-dialog-actions>
         <button mat-button cdkFocusInitial (click)="search()">Tìm kiếm</button>
+        <button mat-button mat-dialog-close>Đóng</button>
     </mat-dialog-actions>
 </div>
 
@@ -15,9 +15,9 @@
     <mat-dialog-content class="mat-typography">
         <app-search-result style="width: 100%;" [data]="searchResult" (selectRow)="onSelectRow($event)"></app-search-result>
     </mat-dialog-content>
-    <mat-dialog-actions align="end">
-        <button mat-button mat-dialog-close>Đóng</button>
+    <mat-dialog-actions>
         <button mat-button cdkFocusInitial (click)="goBackSearchForm()">Tìm kiếm mới</button>
+        <button mat-button mat-dialog-close>Đóng</button>
     </mat-dialog-actions>
 </div>
 

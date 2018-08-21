@@ -53,4 +53,13 @@ export class SearchService {
   public clearLatestSearchResult() {
     this._latestSearchResult = null;
   }
+
+  public suggest(field: string, types: DataType[], searchObj: { [key: string]: string | string[] }): Observable<string[]> {
+    return this.search(types, searchObj).pipe(
+      map(data => data.map(feature => feature.properties[field])),
+      map(data => Array.from(new Set(data))),
+      map(data => data.sort()),
+      // tap(_ => console.log(_))
+    );
+  }
 }

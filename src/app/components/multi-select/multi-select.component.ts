@@ -1,5 +1,5 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
 import { Observable } from 'rxjs';
@@ -10,7 +10,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: './multi-select.component.html',
   styleUrls: ['./multi-select.component.scss']
 })
-export class MultiSelectComponent {
+export class MultiSelectComponent implements OnChanges {
   visible = true;
   selectable = true;
   removable = true;
@@ -20,10 +20,8 @@ export class MultiSelectComponent {
   separatorKeysCodes: number[] = [ENTER, COMMA];
   itemCtrl = new FormControl();
   filteredItems: Observable<string[]>;
-  @Input()
   selectedItems: string[] = [];
-  @Output()
-  selectedItemsChange = new EventEmitter<string[]>();
+  @Input() formCtrl: FormControl;
 
   @Input()
   suggestItems: string[] = [];
@@ -33,12 +31,8 @@ export class MultiSelectComponent {
   constructor() {
     this.filteredItems = this.itemCtrl.valueChanges.pipe(
       startWith(null),
-      map((item: string | null) => {
-        const _fiteredItems = item ? this._filter(item) : this.suggestItems.slice();
-        // console.log(_fiteredItems);
-        // return _fiteredItems;
-        return _fiteredItems.filter(_item => this.selectedItems.indexOf(_item) === -1);
-      }));
+      map((item: string | null) => item ? this._filter(item) : this.suggestItems.slice())
+    );
   }
 
   add(event: MatChipInputEvent): void {
@@ -83,7 +77,11 @@ export class MultiSelectComponent {
 
   private _updateSelectedItemsChange() {
     // emmit ra một copy của mảng- đm, fix mấy mấy tiếng.
-    this.selectedItemsChange.emit(this.selectedItems.slice());
+    this.formCtrl.setValue(this.selectedItems.slice());
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.itemCtrl.setValue(this.itemCtrl.value);
   }
 
 }

@@ -47,20 +47,24 @@ export class DataService {
   }
 
   public search(type: DataType, searchObj: { [key: string]: string | string[] }): Observable<DataWrapper> {
-    return this.getData(type).pipe(
-      map(wrapper => {
-        const features = wrapper.featureCollection.features;
-        wrapper.featureCollection.features = features.filter(item => {
-          for (const key of Object.keys(searchObj)) {
-            if (!this._isSatisfied(searchObj[key], item.properties[key])) {
-              return false;
+    if (Object.keys(searchObj).length === 0) {
+      return this.getData(type);
+    } else {
+      return this.getData(type).pipe(
+        map(wrapper => {
+          const features = wrapper.featureCollection.features;
+          wrapper.featureCollection.features = features.filter(item => {
+            for (const key of Object.keys(searchObj)) {
+              if (!this._isSatisfied(searchObj[key], item.properties[key])) {
+                return false;
+              }
             }
-          }
-          return true;
-        });
-        return wrapper;
-      }),
-    );
+            return true;
+          });
+          return wrapper;
+        }),
+      );
+    }
   }
 
   private _isSatisfied(comparedValue: string | string[], originValue: string): boolean {
