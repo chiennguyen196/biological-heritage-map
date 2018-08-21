@@ -1,11 +1,8 @@
 <div class="search-form">
   <mat-form-field class="form-field-full-width">
-    <input matInput placeholder="Favorite food" value="Sushi">
+    <input matInput placeholder="Tên" [(ngModel)]="name">
   </mat-form-field>
-
-  <mat-form-field class="form-field-full-width">
-    <textarea matInput placeholder="Leave a comment"></textarea>
-  </mat-form-field>
-  <app-multi-select label="Hello" [suggestItems]="['Apple', 'Orange']" [(selectedItems)]="test"></app-multi-select>
-  <p>{{test}}</p>
+  <app-multi-select label="Kiểu loại" [suggestItems]="typeOptions" [(selectedItems)]="type"></app-multi-select>
+  <app-multi-select label="Vùng" [suggestItems]="regionOptions" [(selectedItems)]="region"></app-multi-select>
+  <p>{{type}}</p>
 </div>

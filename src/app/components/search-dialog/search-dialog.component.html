@@ -1,1 +1,10 @@
-<app-search-form></app-search-form>
+<div>
+    <h2 mat-dialog-title>Tìm kiếm</h2>
+    <mat-dialog-content class="mat-typography">
+        <app-search-form></app-search-form>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Đóng</button>
+        <button mat-button cdkFocusInitial (click)="search()">Tìm kiếm</button>
+    </mat-dialog-actions>
+</div>

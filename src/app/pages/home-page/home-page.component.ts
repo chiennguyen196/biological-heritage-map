@@ -1,5 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
-import { DataWrapper } from '../../domains/data-wrapper';
+import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { DataType } from '../../domains/data-type.enum';
 import { zip } from 'rxjs';
@@ -14,9 +13,10 @@ import { SearchDialogComponent } from '../../components/search-dialog/search-dia
 })
 export class HomePageComponent extends LeafletMapWrapper implements OnInit {
 
+
   constructor(
     private dataService: DataService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     super();
   }
@@ -37,7 +37,8 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
 
   onClickSearchButton() {
     console.log('Search button clicked');
-    this.dialog.open(SearchDialogComponent);
+    const searchDialogRef = this.dialog.open(SearchDialogComponent, {
+    });
   }
 
 }

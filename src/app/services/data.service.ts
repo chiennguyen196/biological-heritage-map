@@ -46,13 +46,13 @@ export class DataService {
     );
   }
 
-  public search(type: DataType, searchObj: { [key: string]: string }): Observable<DataWrapper> {
+  public search(type: DataType, searchObj: { [key: string]: string | string[] }): Observable<DataWrapper> {
     return this.getData(type).pipe(
       map(wrapper => {
         const features = wrapper.featureCollection.features;
         wrapper.featureCollection.features = features.filter(item => {
           for (const key of Object.keys(searchObj)) {
-            if (searchObj[key] !== item.properties[key]) {
+            if (!this._isSatisfied(searchObj[key], item.properties[key])) {
               return false;
             }
           }
@@ -61,5 +61,25 @@ export class DataService {
         return wrapper;
       }),
     );
+  }
+
+  private _isSatisfied(comparedValue: string | string[], originValue: string): boolean {
+    originValue = originValue.toLocaleLowerCase();
+    if (comparedValue == null || comparedValue === '' || comparedValue.length === 0) {
+      return true;
+    }
+    if (typeof comparedValue === 'string') {
+      return originValue.indexOf(comparedValue.toLocaleLowerCase()) > -1;
+    } else {
+      comparedValue = comparedValue.map(item => item.toLocaleLowerCase());
+      const spiltedOriginValue = originValue.split(',');
+      for (const item of spiltedOriginValue) {
+        if (comparedValue.indexOf(item.trim()) > -1) {
+          return true;
+        }
+      }
+      return false;
+    }
+
   }
 }

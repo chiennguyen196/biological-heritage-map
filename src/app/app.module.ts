@@ -17,6 +17,7 @@ import { SearchDialogComponent } from './components/search-dialog/search-dialog.
 import { SearchFormComponent } from './components/search-dialog/search-form/search-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { SearchResultComponent } from './components/search-dialog/search-result/search-result.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { MultiSelectComponent } from './components/multi-select/multi-select.com
     NotFoundComponent,
     SearchDialogComponent,
     SearchFormComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
+    SearchResultComponent
   ],
   imports: [
     BrowserModule,
