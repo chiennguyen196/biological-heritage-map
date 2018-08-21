@@ -16,6 +16,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { SearchDialogComponent } from './components/search-dialog/search-dialog.component';
 import { SearchFormComponent } from './components/search-dialog/search-form/search-form.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 
 @NgModule({
   declarations: [
@@ -27,16 +28,17 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     HtmlViewerComponent,
     NotFoundComponent,
     SearchDialogComponent,
-    SearchFormComponent
+    SearchFormComponent,
+    MultiSelectComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
     AppRoutingModule,
     AngularMaterialModule,
     LeafletModule.forRoot(),
     HttpClientModule,
-    FormsModule,
     ReactiveFormsModule
   ],
   entryComponents: [SearchDialogComponent],

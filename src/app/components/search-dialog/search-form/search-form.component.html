@@ -6,4 +6,6 @@
   <mat-form-field class="form-field-full-width">
     <textarea matInput placeholder="Leave a comment"></textarea>
   </mat-form-field>
+  <app-multi-select label="Hello" [suggestItems]="['Apple', 'Orange']" [(selectedItems)]="test"></app-multi-select>
+  <p>{{test}}</p>
 </div>
