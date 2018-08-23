@@ -7,6 +7,7 @@ import { RegionType } from '../../domains/region-type.enum';
 import { environment } from '../../../environments/environment';
 import { Subscription, zip } from 'rxjs';
 import { DataType } from '../../domains/data-type.enum';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-region-page',
@@ -21,12 +22,15 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
     private dataService: DataService,
     private route: ActivatedRoute,
     private router: Router,
-    private _ngZone: NgZone
+    private _ngZone: NgZone,
+    private _searchService: SearchService
   ) {
-    super(_ngZone);
+    super(_ngZone, _searchService);
   }
 
   ngOnInit() {
+    super.ngOnInit();
+
     this.routeSubscription = this.route.paramMap.subscribe((paramMap: ParamMap) => {
       const id = paramMap.get('id');
       let regionType: RegionType;
@@ -56,6 +60,7 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
   }
 
   ngOnDestroy(): void {
+    super.ngOnDestroy();
     this.routeSubscription.unsubscribe();
   }
 

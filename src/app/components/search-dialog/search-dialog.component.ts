@@ -16,7 +16,7 @@ export class SearchDialogComponent implements OnInit {
 
   searchResult = null;
 
-  public selectFeature = new EventEmitter<Feature>();
+  // public selectFeature = new EventEmitter<Feature>();
 
   constructor(
     private searchService: SearchService
@@ -27,10 +27,10 @@ export class SearchDialogComponent implements OnInit {
   }
 
   search() {
-    console.log('Search!');
+    // console.log('Search!');
     const searchFormValues = this.searchFormComponent.getValues();
     this.searchService.search(searchFormValues.types, searchFormValues.searchObject).subscribe(data => {
-      console.log(Array.isArray(data));
+      // console.log(Array.isArray(data));
       this.searchResult = data;
     });
   }
@@ -41,6 +41,7 @@ export class SearchDialogComponent implements OnInit {
   }
 
   onSelectRow(feature: Feature) {
-    this.selectFeature.emit(feature);
+    // console.log(feature);
+    this.searchService.selectFeature(feature);
   }
 }

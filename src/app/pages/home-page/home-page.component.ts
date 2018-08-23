@@ -5,6 +5,7 @@ import { zip } from 'rxjs';
 import { LeafletMapWrapper } from '../../components/leaflet-map/leaflet-map-wrapper';
 import { MatDialog } from '@angular/material/dialog';
 import { SearchDialogComponent } from '../../components/search-dialog/search-dialog.component';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-home-page',
@@ -15,17 +16,14 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private dialog: MatDialog,
-    private _ngZone: NgZone
+    private _ngZone: NgZone,
+    private _searchService: SearchService
   ) {
-    super(_ngZone);
+    super(_ngZone, _searchService);
   }
 
   ngOnInit() {
-    // this.dataService.getData(DataType.TINH).subscribe(data => {
-    //   // do not use push, use equal instead
-    //   this.dataWrappers = [data];
-    // });
+    super.ngOnInit();
     zip(
       this.dataService.getData(DataType.TINH),
       this.dataService.getData(DataType.KHU_BAO_TON),
@@ -34,18 +32,4 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
       this.dataService.getData(DataType.VUON_QUOC_GIA)
     ).subscribe(val => this.dataWrappers = val);
   }
-
-  onClickSearchButton() {
-    console.log('Search button clicked');
-    const searchDialogRef = this.dialog.open(SearchDialogComponent, {
-      // position: {
-      //   right: '1em;'
-      // },
-      // hasBackdrop: false
-    });
-    searchDialogRef.componentInstance.selectFeature.subscribe(feature => {
-      this.fitBounds(feature);
-    });
-  }
-
 }

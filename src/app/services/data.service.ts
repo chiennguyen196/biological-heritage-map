@@ -76,7 +76,7 @@ export class DataService {
       return originValue.indexOf(comparedValue.toLocaleLowerCase()) > -1;
     } else {
       comparedValue = comparedValue.map(item => item.toLocaleLowerCase());
-      const spiltedOriginValue = originValue.split(',');
+      const spiltedOriginValue = originValue.split(';');
       for (const item of spiltedOriginValue) {
         if (comparedValue.indexOf(item.trim()) > -1) {
           return true;

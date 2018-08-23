@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { DataType } from '../domains/data-type.enum';
-import { Observable, concat, zip } from 'rxjs';
+import { Observable, concat, zip, Subject } from 'rxjs';
 import { GeoJsonProperties, Feature } from 'geojson';
 import { map, tap } from 'rxjs/operators';
 import { DataWrapper } from '../domains/data-wrapper';
@@ -12,6 +12,7 @@ import { DataWrapper } from '../domains/data-wrapper';
 export class SearchService {
 
   private _latestSearchResult: Feature[] = null;
+  private _selectedFeatureSubject = new Subject<Feature>();
 
   constructor(
     private dataService: DataService
@@ -62,4 +63,13 @@ export class SearchService {
       // tap(_ => console.log(_))
     );
   }
+
+  public selectFeature(feature: Feature) {
+    this._selectedFeatureSubject.next(feature);
+  }
+
+  get selectedFeatureSubject(): Subject<Feature> {
+    return this._selectedFeatureSubject;
+  }
+
 }
