@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Inject } from '@angular/core';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { SearchService } from '../../services/search.service';
 import { Feature } from 'geojson';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-search-dialog',
@@ -19,7 +20,8 @@ export class SearchDialogComponent implements OnInit {
   // public selectFeature = new EventEmitter<Feature>();
 
   constructor(
-    private searchService: SearchService
+    private searchService: SearchService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {

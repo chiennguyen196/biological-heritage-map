@@ -1,8 +1,8 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, ElementRef, ViewChild, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatChipInputEvent } from '@angular/material';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
@@ -10,7 +10,8 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: './multi-select.component.html',
   styleUrls: ['./multi-select.component.scss']
 })
-export class MultiSelectComponent implements OnChanges {
+export class MultiSelectComponent implements OnChanges, OnInit, OnDestroy {
+
   visible = true;
   selectable = true;
   removable = true;
@@ -27,6 +28,8 @@ export class MultiSelectComponent implements OnChanges {
   suggestItems: string[] = [];
 
   @ViewChild('itemInput') itemInput: ElementRef;
+
+  private formCtrlValueChangesSubcription: Subscription;
 
   constructor() {
     this.filteredItems = this.itemCtrl.valueChanges.pipe(
@@ -82,6 +85,19 @@ export class MultiSelectComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.itemCtrl.setValue(this.itemCtrl.value);
+  }
+
+  ngOnInit(): void {
+    this.formCtrlValueChangesSubcription =
+      this.formCtrl.valueChanges.subscribe(val => {
+        this.selectedItems = val;
+        console.log(val);
+      });
+    this.formCtrl.setValue(this.formCtrl.value);
+  }
+
+  ngOnDestroy(): void {
+    this.formCtrlValueChangesSubcription.unsubscribe();
   }
 
 }

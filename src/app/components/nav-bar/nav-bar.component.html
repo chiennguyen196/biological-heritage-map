@@ -6,7 +6,7 @@
   <div *ngFor="let key of objectKeys(regionUrls)">
     <button mat-button [routerLink]="regionPrefix + '/' + key">{{regionUrls[key].short_name || regionUrls[key].type}}</button>
   </div>
-
+  <span class="example-spacer"></span>
   <div class="pull-right">
     <button mat-button (click)="onClickSearchButton()">Tìm kiếm</button>
   </div>

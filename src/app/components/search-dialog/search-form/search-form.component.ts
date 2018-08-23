@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DataType } from '../../../domains/data-type.enum';
 import { RegionType } from '../../../domains/region-type.enum';
@@ -11,7 +11,9 @@ import { map, tap, startWith } from 'rxjs/operators';
   templateUrl: './search-form.component.html',
   styleUrls: ['./search-form.component.scss']
 })
-export class SearchFormComponent implements OnInit {
+export class SearchFormComponent implements OnInit, OnChanges {
+
+  @Input() regionType: RegionType;
 
   nameCtrl = new FormControl('');
   typeCtrl = new FormControl([]);
@@ -19,7 +21,7 @@ export class SearchFormComponent implements OnInit {
   provinceCtrl = new FormControl([]);
 
   subGourp = new FormGroup({
-    'typeCtrl' : this.typeCtrl,
+    'typeCtrl': this.typeCtrl,
     'regionCtrl': this.regionCtrl
   });
 
@@ -39,6 +41,7 @@ export class SearchFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.regionCtrl.setValue(this.regionType ? [this.regionType] : []);
     this.subGourp.valueChanges.pipe(
       tap(_ => {
         const searchObject = {
@@ -66,6 +69,12 @@ export class SearchFormComponent implements OnInit {
       })
     );
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.regionType);
+    this.regionCtrl.setValue(this.regionType ? [this.regionType] : []);
+  }
+
 
 
   public getValues() {
