@@ -49,7 +49,7 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
     };
     zip(
       this.dataService.search(DataType.TINH, searchObj),
-      this.dataService.search(DataType.KHU_BAO_TON, searchObj),
+      // this.dataService.search(DataType.KHU_BAO_TON, searchObj),
       this.dataService.search(DataType.KHU_DI_SAN, searchObj),
       this.dataService.search(DataType.KHU_DU_TRU_SINH_QUYEN, searchObj),
       this.dataService.search(DataType.VUON_QUOC_GIA, searchObj)

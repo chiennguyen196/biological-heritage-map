@@ -26,7 +26,7 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
     super.ngOnInit();
     zip(
       this.dataService.getData(DataType.TINH),
-      this.dataService.getData(DataType.KHU_BAO_TON),
+      // this.dataService.getData(DataType.KHU_BAO_TON),
       this.dataService.getData(DataType.KHU_DI_SAN),
       this.dataService.getData(DataType.KHU_DU_TRU_SINH_QUYEN),
       this.dataService.getData(DataType.VUON_QUOC_GIA)

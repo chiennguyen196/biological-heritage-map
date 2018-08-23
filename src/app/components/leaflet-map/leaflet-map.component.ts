@@ -31,7 +31,10 @@ export class LeafletMapComponent implements OnChanges {
 
   options = {
     layers: [
-      tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '' })
+      tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+        maxZoom: 20,
+        subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+      })
     ],
     zoom: 5,
     center: latLng(16.474901, 105.8425937)
@@ -94,7 +97,7 @@ export class LeafletMapComponent implements OnChanges {
       style: (feature: Feature) => {
         return {
           weight: 1,
-          fillOpacity: 0.2,
+          fillOpacity: dataWrapper.type === DataType.TINH ? 0.2 : 0.5,
           fillColor: MyUltis.getColorOfFeature(dataWrapper.type, feature)
         };
       }
