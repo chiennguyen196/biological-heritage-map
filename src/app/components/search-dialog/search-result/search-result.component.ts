@@ -12,11 +12,11 @@ export class SearchResultComponent {
   @Output() selectRow = new EventEmitter<Feature>();
 
   displayConfig = {
-    'AREA': 'AREA',
-    'NameUTF8': 'Tên',
-    'Tinh': 'Tỉnh',
+    // 'AREA': 'AREA',
+    'type': 'Loại',
     'Vung': 'Vùng',
-    'type': 'Loại'
+    'Tinh': 'Tỉnh',
+    'NameUTF8': 'Tên',
   };
 
   objectkeys = Object.keys;

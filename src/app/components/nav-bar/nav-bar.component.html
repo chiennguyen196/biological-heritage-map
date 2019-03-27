@@ -1,7 +1,7 @@
 <mat-toolbar color="primary">
   <!-- <button mat-button [routerLink]="['/admin/report']">Report</button> -->
   <button mat-button [routerLink]="['/']">
-    <span class="website-name" [routerLink]="">Đa dạng sinh học</span>
+    <span class="website-name" [routerLink]="">Việt Nam</span>
   </button>
   <div *ngFor="let key of objectKeys(regionUrls)">
     <button mat-button [routerLink]="regionPrefix + '/' + key">{{regionUrls[key].short_name || regionUrls[key].type}}</button>

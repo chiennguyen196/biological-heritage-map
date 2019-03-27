@@ -6,6 +6,7 @@ import { LeafletMapWrapper } from '../../components/leaflet-map/leaflet-map-wrap
 import { MatDialog } from '@angular/material/dialog';
 import { SearchDialogComponent } from '../../components/search-dialog/search-dialog.component';
 import { SearchService } from '../../services/search.service';
+import { EventWrapper } from 'src/app/domains/event-wrapper';
 
 @Component({
   selector: 'app-home-page',
@@ -13,6 +14,8 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent extends LeafletMapWrapper implements OnInit {
+
+  urlDetail: String;
 
   constructor(
     private dataService: DataService,
@@ -31,5 +34,15 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
       this.dataService.getData(DataType.KHU_DU_TRU_SINH_QUYEN),
       this.dataService.getData(DataType.VUON_QUOC_GIA)
     ).subscribe(val => this.dataWrappers = val);
+  }
+
+  onClickLayer(event: EventWrapper) {
+    super.onClickLayer(event);
+    console.log(event);
+    if (event.data.properties.Link_Mota) {
+      this._ngZone.run(() => {
+        this.urlDetail = event.data.properties.Link_Mota;
+      });
+    }
   }
 }

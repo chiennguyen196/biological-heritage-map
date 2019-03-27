@@ -18,6 +18,9 @@
     <mat-dialog-actions>
         <button mat-button cdkFocusInitial (click)="goBackSearchForm()">Tìm kiếm mới</button>
         <button mat-button mat-dialog-close>Đóng</button>
+        <span class="fill-space"></span>
+        <button mat-button (click)="printDirectly()">In</button>
+        <button mat-button (click)="exportAsExcelFile()">Xuất Excel</button>
     </mat-dialog-actions>
 </div>
 

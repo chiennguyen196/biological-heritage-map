@@ -3,6 +3,7 @@ import { SearchFormComponent } from './search-form/search-form.component';
 import { SearchService } from '../../services/search.service';
 import { Feature } from 'geojson';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { PrintService } from 'src/app/services/print.service';
 
 @Component({
   selector: 'app-search-dialog',
@@ -16,11 +17,18 @@ export class SearchDialogComponent implements OnInit {
   searchFormComponent: SearchFormComponent;
 
   searchResult = null;
-
+  private mapping =  {
+    // 'AREA': 'AREA',
+    'type': 'Loại',
+    'Vung': 'Vùng',
+    'Tinh': 'Tỉnh',
+    'NameUTF8': 'Tên',
+  };
   // public selectFeature = new EventEmitter<Feature>();
 
   constructor(
     private searchService: SearchService,
+    private printService: PrintService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
@@ -45,5 +53,13 @@ export class SearchDialogComponent implements OnInit {
   onSelectRow(feature: Feature) {
     // console.log(feature);
     this.searchService.selectFeature(feature);
+  }
+
+  printDirectly() {
+    this.printService.printDirectly(this.searchResult, this.mapping);
+  }
+
+  exportAsExcelFile() {
+    this.printService.exportAsExcelFile(this.searchResult, this.mapping, 'export');
   }
 }

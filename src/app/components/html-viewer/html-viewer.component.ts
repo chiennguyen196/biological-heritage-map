@@ -20,7 +20,7 @@ export class HtmlViewerComponent implements OnChanges {
   ngOnChanges() {
     // console.log('ng changes');
     if (this.url) {
-      this.htmlString = null;
+      this.htmlString = "Đang tải...";
       this.http.get(this.url, { responseType: 'text' }).subscribe(
         val => {
           this.htmlString = val;

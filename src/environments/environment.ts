@@ -18,32 +18,32 @@ export const environment = {
 
   region: {
     urls: {
-      'bac-trung-bo': {
-        type: RegionType.BAC_TRUNG_BO,
+      'tay-bac': {
+        type: RegionType.TAY_BAC
       },
       'dong-bac': {
         type : RegionType.DONG_BAC,
-      },
-      'dong-bang-song-cuu-long': {
-        type: RegionType.DONG_BANG_SONG_CUU_LONG,
-        short_name: 'ĐB S.Cửu Long'
       },
       'dong-bang-song-hong': {
         type: RegionType.DONG_BANG_SONG_HONG,
         short_name: 'ĐB S.Hồng'
       },
+      'bac-trung-bo': {
+        type: RegionType.BAC_TRUNG_BO,
+      },
+      'tay-nguyen': {
+        type: RegionType.TAY_NGUYEN
+      },
       'dong-nam-bo': {
         type: RegionType.DONG_NAM_BO
+      },
+      'dong-bang-song-cuu-long': {
+        type: RegionType.DONG_BANG_SONG_CUU_LONG,
+        short_name: 'ĐB S.Cửu Long'
       },
       'nam-trung-bo': {
         type: RegionType.NAM_TRUNG_BO
       },
-      'tay-bac': {
-        type: RegionType.TAY_BAC
-      },
-      'tay-nguyen': {
-        type: RegionType.TAY_NGUYEN
-      }
     },
     prefix: 'vung'
   }

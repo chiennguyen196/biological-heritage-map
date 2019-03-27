@@ -39,5 +39,6 @@ testem.log
 Thumbs.db
 
 src/assets/data/
+src/assets/html/
 src/assets/detail.html
 .vscode/

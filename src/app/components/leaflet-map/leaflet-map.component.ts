@@ -36,7 +36,7 @@ export class LeafletMapComponent implements OnChanges {
         subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
       })
     ],
-    zoom: 5,
+    zoom: 5.5,
     center: latLng(16.474901, 105.8425937)
   };
 
@@ -67,8 +67,8 @@ export class LeafletMapComponent implements OnChanges {
     const mouseoverFeature = (e: LeafletEvent) => {
       const layer = e.target;
       layer.setStyle({
-        weight: 1,
-        color: '#666',
+        weight: 3,
+        color: '#FF0000',
         dashArray: '',
         fillOpacity: 0.7,
         fillColor: '#666'
