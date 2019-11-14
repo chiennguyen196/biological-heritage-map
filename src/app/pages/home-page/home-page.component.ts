@@ -38,7 +38,7 @@ export class HomePageComponent extends LeafletMapWrapper implements OnInit {
 
   onClickLayer(event: EventWrapper) {
     super.onClickLayer(event);
-    console.log(event);
+    console.log(event.data.properties.Link_Mota);
     if (event.data.properties.Link_Mota) {
       this._ngZone.run(() => {
         this.urlDetail = event.data.properties.Link_Mota;

@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { Subscription, zip } from 'rxjs';
 import { DataType } from '../../domains/data-type.enum';
 import { SearchService } from '../../services/search.service';
+import { EventWrapper } from 'src/app/domains/event-wrapper';
 
 @Component({
   selector: 'app-region-page',
@@ -17,6 +18,7 @@ import { SearchService } from '../../services/search.service';
 export class RegionPageComponent extends LeafletMapWrapper implements OnInit, OnDestroy {
 
   private routeSubscription: Subscription;
+  urlDetail: String;
 
   constructor(
     private dataService: DataService,
@@ -62,6 +64,16 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
   ngOnDestroy(): void {
     super.ngOnDestroy();
     this.routeSubscription.unsubscribe();
+  }
+
+  onClickLayer(event: EventWrapper) {
+    super.onClickLayer(event);
+    console.log(event.data.properties.Link_Mota);
+    if (event.data.properties.Link_Mota) {
+      this._ngZone.run(() => {
+        this.urlDetail = event.data.properties.Link_Mota;
+      });
+    }
   }
 
 }

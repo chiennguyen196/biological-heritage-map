@@ -1,1 +1,14 @@
-<div [innerHTML]="htmlString">Loading...</div>
+<!-- <div [innerHTML]="htmlString">Loading...</div> -->
+<style>
+    .the-iframe {
+        background: url(assets/images/loading.gif) center center no-repeat;
+    }
+</style>
+<div *ngIf="safeUrl; else elseBlock" style="height:100%;" class="the-iframe">
+    <iframe style="width:100%; height:100%" [src]="safeUrl || 'assets/404.html'" class="the-iframe" onload="$('.holds-the-iframe').css('background', 'none');" ></iframe>
+</div>
+<ng-template #elseBlock>
+    <div style="padding: 1em;">
+        <p>Không có dữ liệu</p>
+    </div>
+</ng-template>
