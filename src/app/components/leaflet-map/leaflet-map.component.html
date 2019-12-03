@@ -1,7 +1,12 @@
-<div style="height: 537px;"
+<div *ngIf="dataWrappers.length > 0; else elseBlock">
+    <div style="height: 537px;"
      leaflet 
      [leafletOptions]="options"
      [leafletLayers]="layers"
      [leafletFitBounds]="fitBounds"
      (leafletMapReady)="onMapReady($event)">
 </div>
+</div>
+<ng-template #elseBlock>
+    <div style="height: 537px;">Đang tải bản đồ...</div>
+</ng-template>

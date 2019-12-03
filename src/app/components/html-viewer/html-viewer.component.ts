@@ -22,18 +22,6 @@ export class HtmlViewerComponent implements OnChanges {
 
   ngOnChanges() {
     console.log(this.url);
-    // if (this.url) {
-    //   this.htmlString = 'Đang tải...';
-    //   this.http.get(this.url, { responseType: 'text' }).subscribe(
-    //     val => {
-    //       this.htmlString = val;
-    //     },
-    //     err => {
-    //       this.htmlString = err.message;
-    //     });
-    // } else {
-    //   this.htmlString = `Không có dữ liệu`;
-    // }
     if (this.url) {
       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
     }
