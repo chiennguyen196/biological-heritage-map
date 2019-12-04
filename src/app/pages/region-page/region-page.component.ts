@@ -69,11 +69,13 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
   onClickLayer(event: EventWrapper) {
     super.onClickLayer(event);
     console.log(event.data.properties.Link_Mota);
+    let detailUrl = "assets/404.html"
     if (event.data.properties.Link_Mota) {
-      this._ngZone.run(() => {
-        this.urlDetail = event.data.properties.Link_Mota;
-      });
+      detailUrl = event.data.properties.Link_Mota;
     }
+    this._ngZone.run(() => {
+      this.urlDetail = detailUrl;
+    });
   }
 
 }
