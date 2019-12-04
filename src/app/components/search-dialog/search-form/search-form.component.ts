@@ -15,7 +15,7 @@ export class SearchFormComponent implements OnInit, OnChanges {
 
   @Input() regionType: RegionType;
 
-  nameCtrl = new FormControl('');
+  nameCtrl = new FormControl([]);
   typeCtrl = new FormControl([]);
   regionCtrl = new FormControl([]);
   provinceCtrl = new FormControl([]);
@@ -33,8 +33,6 @@ export class SearchFormComponent implements OnInit, OnChanges {
 
   provinceOptions = [];
   nameOptions = [];
-
-  filteredNameOptions: Observable<string[]>;
 
   constructor(
     private searchService: SearchService
@@ -57,25 +55,12 @@ export class SearchFormComponent implements OnInit, OnChanges {
       })
     ).subscribe(val => console.log(val));
 
-    this.filteredNameOptions = this.nameCtrl.valueChanges.pipe(
-      startWith(null),
-      map(item => {
-        if (item) {
-          item = item.toLowerCase();
-          return this.nameOptions.filter(option => option.toLowerCase().includes(item));
-        } else {
-          return this.nameOptions;
-        }
-      })
-    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(this.regionType);
     this.regionCtrl.setValue(this.regionType ? [this.regionType] : []);
   }
-
-
 
   public getValues() {
     return {
@@ -87,13 +72,5 @@ export class SearchFormComponent implements OnInit, OnChanges {
       }
     };
   }
-
-  // private _filterNames(value: string): string[] {
-  //   const filterValue = value.toLowerCase();
-
-  //   return this.nameOptions.filter(option => option.toLowerCase().includes(filterValue));
-  // }
-
-
 
 }
