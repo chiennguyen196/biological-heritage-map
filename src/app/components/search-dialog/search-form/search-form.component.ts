@@ -26,7 +26,7 @@ export class SearchFormComponent implements OnInit, OnChanges {
   });
 
   typeOptions: DataType[] = [
-    DataType.KHU_BAO_TON, DataType.KHU_DI_SAN, DataType.KHU_DU_TRU_SINH_QUYEN, DataType.VUON_QUOC_GIA
+    DataType.KHU_DI_SAN, DataType.KHU_DU_TRU_SINH_QUYEN, DataType.VUON_QUOC_GIA
   ];
 
   regionOptions: string[] = Object.keys(RegionType).map(key => RegionType[key]);

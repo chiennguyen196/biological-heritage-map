@@ -23,7 +23,6 @@ export class DataService {
   ) { }
 
   private _getUrl(type: DataType): string {
-    if (type === DataType.KHU_BAO_TON) { return DATA_URL.khu_bao_ton; }
     if (type === DataType.KHU_DI_SAN) { return DATA_URL.khu_di_san; }
     if (type === DataType.KHU_DU_TRU_SINH_QUYEN) { return DATA_URL.khu_du_tru_sinh_quyen; }
     if (type === DataType.TINH) { return DATA_URL.tinh; }
