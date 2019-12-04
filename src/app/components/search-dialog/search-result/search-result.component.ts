@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { GeoJsonObject, GeoJsonProperties, Feature } from 'geojson';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Feature } from 'geojson';
 
 @Component({
   selector: 'app-search-result',
