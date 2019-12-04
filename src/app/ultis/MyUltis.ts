@@ -29,7 +29,7 @@ export class MyUltis {
   }
 
   public static getColorOfFeature(type: DataType, feature: Feature): string {
-    if ([DataType.KHU_BAO_TON, DataType.KHU_DI_SAN, DataType.KHU_DU_TRU_SINH_QUYEN, DataType.VUON_QUOC_GIA].find((ele) => ele === type)) {
+    if ([DataType.KHU_DI_SAN, DataType.KHU_DU_TRU_SINH_QUYEN, DataType.VUON_QUOC_GIA].find((ele) => ele === type)) {
       return MyUltis.stringToColour(type + 'ABC');
     }
     return null;
