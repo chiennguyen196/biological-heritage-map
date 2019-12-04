@@ -37,15 +37,16 @@ export class RegionPageComponent extends LeafletMapWrapper implements OnInit, On
       const id = paramMap.get('id');
       let regionType: RegionType;
       regionType = environment.region.urls[id].type;
+      this.urlDetail = environment.region.urls[id].detailUrl;
       if (regionType) {
-        this.loadDataIntoMap(regionType);
+        this.loadRegionMap(regionType);
       } else {
         this.router.navigateByUrl('/not-found');
       }
     });
   }
 
-  private loadDataIntoMap(regionType: RegionType) {
+  private loadRegionMap(regionType: RegionType) {
     const searchObj = {
       'Vung': regionType
     };
