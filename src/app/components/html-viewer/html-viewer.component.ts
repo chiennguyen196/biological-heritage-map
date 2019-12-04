@@ -14,9 +14,9 @@ export class HtmlViewerComponent implements OnChanges {
   safeUrl: SafeResourceUrl;
 
   htmlString: string;
+  isLoading = true;
 
   constructor(
-    private http: HttpClient,
     public sanitizer: DomSanitizer
   ) { }
 
@@ -25,6 +25,13 @@ export class HtmlViewerComponent implements OnChanges {
     if (this.url) {
       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.url);
     }
+    this.isLoading = true;
+    console.log("Iframe is loading");
+  }
+
+  onLoad() {
+    this.isLoading = false;
+    console.log("Done loading iframe");
   }
 
 }
