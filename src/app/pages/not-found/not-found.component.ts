@@ -5,13 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss']
 })
-export class NotFoundComponent implements OnInit {
-
-  constructor() { 
-    window.location.href = 'assets/404.html';
-  }
-
-  ngOnInit() {
-  }
+export class NotFoundComponent {
 
 }
