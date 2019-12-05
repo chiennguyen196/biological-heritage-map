@@ -18,6 +18,7 @@ import { SearchFormComponent } from './components/search-dialog/search-form/sear
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { SearchResultComponent } from './components/search-dialog/search-result/search-result.component';
+import { RegionPageWithChildRegionComponent } from './pages/region-page/region-page-with-child-region';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { SearchResultComponent } from './components/search-dialog/search-result/
     LeafletMapComponent,
     HomePageComponent,
     RegionPageComponent,
+    RegionPageWithChildRegionComponent,
     HtmlViewerComponent,
     NotFoundComponent,
     SearchDialogComponent,

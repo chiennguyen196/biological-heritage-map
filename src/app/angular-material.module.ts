@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTableModule } from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
 
 const MAT_MODULES = [
     MatToolbarModule,
@@ -24,7 +25,8 @@ const MAT_MODULES = [
     MatSelectModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatTableModule
+    MatTableModule,
+    MatDividerModule
 ];
 
 @NgModule({
