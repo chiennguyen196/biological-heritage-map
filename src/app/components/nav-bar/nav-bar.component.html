@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <!-- <button mat-button [routerLink]="['/admin/report']">Report</button> -->
+  <button mat-button [routerLink]="['/']">
+    <span class="website-name" [routerLink]="">Việt Nam</span>
+  </button>
+  <div *ngFor="let key of objectKeys(regionUrls)">
+    <button mat-button [matMenuTriggerFor]="menu">
+      {{regionUrls[key].short_name || regionUrls[key].type}} <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <button mat-menu-item [routerLink]="regionPrefix + '/' + key">Xem chi tiết</button>
+      <mat-divider></mat-divider>
+      <div *ngFor="let childKey of objectKeys(regionUrls[key].children)">
+        <button mat-menu-item [routerLink]="regionPrefix + '/' + key + '/' + childKey">{{regionUrls[key].children[childKey].name}}</button>
+      </div>
+    </mat-menu>
+  </div>
+  <span class="example-spacer"></span>
+  <div class="pull-right">
+    <button mat-button (click)="onClickSearchButton()">Tìm kiếm</button>
+  </div>
+</mat-toolbar>

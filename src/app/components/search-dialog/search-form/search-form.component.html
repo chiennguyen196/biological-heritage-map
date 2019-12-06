@@ -1,0 +1,8 @@
+<div class="search-form">
+  <app-multi-select label="Kiểu loại (*)" [suggestItems]="typeOptions" [formCtrl]="typeCtrl"></app-multi-select>
+  <div *ngIf="typeCtrl.value.length > 0">
+    <app-multi-select label="Tên" [suggestItems]="nameOptions" [formCtrl]="nameCtrl"></app-multi-select>
+    <app-multi-select label="Vùng" [suggestItems]="regionOptions" [formCtrl]="regionCtrl"></app-multi-select>
+    <app-multi-select label="Tỉnh" [suggestItems]="provinceOptions" [formCtrl]="provinceCtrl"></app-multi-select>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<table mat-table [dataSource]="data">
+  <ng-container *ngFor="let key of objectkeys(displayConfig)" matColumnDef="{{key}}">
+    <th mat-header-cell *matHeaderCellDef>{{displayConfig[key]}}</th>
+    <td mat-cell *matCellDef="let ele">{{ele.properties[key]}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="objectkeys(displayConfig)"></tr>
+  <tr mat-row *matRowDef="let row; columns: objectkeys(displayConfig);" class="element-row" (click)="onSelectedRow(row)"></tr>
+</table>

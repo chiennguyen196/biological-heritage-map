@@ -1,0 +1,27 @@
+<div *ngIf="searchResult == null">
+    <h2 mat-dialog-title>Tìm kiếm</h2>
+    <mat-dialog-content class="mat-typography">
+        <app-search-form [regionType]="data.regionType"></app-search-form>
+        <!-- <p>{{data.regionType}}</p> -->
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="search()">Tìm kiếm</button>
+        <button mat-button mat-dialog-close>Đóng</button>
+    </mat-dialog-actions>
+</div>
+
+<div *ngIf="searchResult != null">
+    <h2 mat-dialog-title>Kết quả tìm kiếm (có {{searchResult.length}} kết quả)</h2>
+    <mat-dialog-content class="mat-typography">
+        <app-search-result style="width: 100%;" [data]="searchResult" (selectRow)="onSelectRow($event)"></app-search-result>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-button cdkFocusInitial (click)="goBackSearchForm()">Tìm kiếm mới</button>
+        <button mat-button mat-dialog-close>Đóng</button>
+        <span class="fill-space"></span>
+        <button mat-button (click)="printDirectly()">In</button>
+        <button mat-button (click)="exportAsExcelFile()">Xuất Excel</button>
+    </mat-dialog-actions>
+</div>
+
+<!-- <app-search-result [data]="searchResult"></app-search-result> -->
